@@ -7,5 +7,22 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!--android:textSize="20sp"
+    android:textColor="@color/main_bottom_textcolor_selector"
+    android:button="@null"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:background="@drawable/main_bottom_bg_selector"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"-->
+    <style name="MainButtonStyle">
+        <item name="android:textColor">@color/main_bottom_textcolor_selector</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/main_bottom_bg_selector</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 
 </resources>
