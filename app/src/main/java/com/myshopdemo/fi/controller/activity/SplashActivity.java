@@ -9,6 +9,9 @@ import android.os.Message;
 import com.hyphenate.chat.EMClient;
 import com.myshopdemo.fi.R;
 
+/**
+ * 欢迎页面
+ */
 public class SplashActivity extends Activity {
 
     private Handler mHandler = new Handler() {
@@ -33,14 +36,15 @@ public class SplashActivity extends Activity {
                     //获取当前用户的登录信息
 
                     //跳转到主页面
-                    Intent intent=new Intent(SplashActivity.this,MainActivity.class);
+                    Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(intent);
                 }else {//没登录过
                     //跳转到主页面
                     Intent intent=new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
-
+                //结束当前页面
+                finish();
             }
         }.start();
     }

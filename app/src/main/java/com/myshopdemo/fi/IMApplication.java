@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.controller.EaseUI;
+import com.myshopdemo.fi.model.Model;
 
 /**
  * 创建者     yangyanfei
@@ -28,5 +29,8 @@ public class IMApplication extends Application {
 
 //        EaseUI.getInstance().init(this, options);
         EaseUI.getInstance().init(this,options);
+
+        //初始化数据模型层类
+        Model.getInstance().init(this);
     }
 }
