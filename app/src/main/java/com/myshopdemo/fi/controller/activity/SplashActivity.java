@@ -40,11 +40,11 @@ public class SplashActivity extends Activity {
                     //获取当前用户的登录信息
 
                     //跳转到主页面
-                    Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
+                    Intent intent=new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(intent);
                 }else {//没登录过
-                    //跳转到主页面
-                    Intent intent=new Intent(SplashActivity.this,MainActivity.class);
+                    //跳转到登录页面
+                    Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(intent);
                 }
                 //结束当前页面
