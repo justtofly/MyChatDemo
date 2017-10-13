@@ -1,7 +1,7 @@
 package com.myshopdemo.fi.controller.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -11,18 +11,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.chat.EMClient;
 import com.myshopdemo.fi.R;
 import com.myshopdemo.fi.model.Model;
 import com.myshopdemo.fi.model.bean.UserInfo;
 
 //添加联系人页面
-public class AddContactActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddContactActivity extends Activity implements View.OnClickListener {
     private TextView       tvAddcontactSearch;
     private ImageView      ivAddcontactIcon;
     private TextView       tvAddcontactName;
     private Button         btnAddcontactAdd;
     private EditText       et_addcontact_name;
     private RelativeLayout rl_addcontact;
+    private UserInfo mUserInfo;
 
     /**
      * Find the Views in the layout<br />
@@ -35,7 +37,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         ivAddcontactIcon = (ImageView) findViewById(R.id.iv_addcontact_icon);
         tvAddcontactName = (TextView) findViewById(R.id.tv_addcontact_name);
         btnAddcontactAdd = (Button) findViewById(R.id.btn_addcontact_add);
-        et_addcontact_name = (EditText)findViewById( R.id.et_addcontact_name );
+        et_addcontact_name = (EditText) findViewById( R.id.et_addcontact_name );
         rl_addcontact = (RelativeLayout)findViewById( R.id.rl_addcontact );
 
         btnAddcontactAdd.setOnClickListener( this );
@@ -66,14 +68,15 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-                final UserInfo userInfo=new UserInfo(name);
+                //去服务器判断当前查找的用户是否存在
+                mUserInfo = new UserInfo(name);
 
                 //更新UI显示
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         rl_addcontact.setVisibility(View.VISIBLE);
-                        tvAddcontactName.setText(userInfo.getName());
+                        tvAddcontactName.setText(mUserInfo.getName());
                     }
                 });
             }
@@ -81,8 +84,34 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    /**
+     * 添加按钮的事件处理
+     */
     private void add() {
+        Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                //去环信服务器中添加好友
+                try {
+                    EMClient.getInstance().contactManager().addContact(mUserInfo.getName(),"添加好友");
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(AddContactActivity.this,"发送添加好友邀请成功",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(AddContactActivity.this,"发送添加好友邀请失败"+e.toString(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
     }
 
 
