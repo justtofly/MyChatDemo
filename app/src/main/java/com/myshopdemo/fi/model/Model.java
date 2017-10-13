@@ -2,6 +2,9 @@ package com.myshopdemo.fi.model;
 
 import android.content.Context;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * 创建者     yangyanfei
  * 创建时间   2017/10/13 0013 7:52
@@ -14,6 +17,9 @@ import android.content.Context;
  */
 public class Model {
     private Context mContext;
+
+    //创建线程池对象
+    private ExecutorService executors = Executors.newCachedThreadPool();
 
     //创建对象
     private static Model model = new Model();
@@ -30,5 +36,10 @@ public class Model {
     //初始化的方法
     public void init(Context context) {
         mContext = context;
+    }
+
+    //获取全局线程池对象
+    public ExecutorService getGlobalThreadPool(){
+        return executors;
     }
 }

@@ -8,6 +8,7 @@ import android.os.Message;
 
 import com.hyphenate.chat.EMClient;
 import com.myshopdemo.fi.R;
+import com.myshopdemo.fi.model.Model;
 
 /**
  * 欢迎页面
@@ -28,7 +29,10 @@ public class SplashActivity extends Activity {
     };
 
     private void toMainOrLogin() {
-        new Thread() {
+        /**
+         * 使用全局线程池管理，开启线程
+         */
+        Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
             @Override
             public void run() {
                 //判断当前帐号是否已经登录过
@@ -46,7 +50,7 @@ public class SplashActivity extends Activity {
                 //结束当前页面
                 finish();
             }
-        }.start();
+        });
     }
 
     @Override
