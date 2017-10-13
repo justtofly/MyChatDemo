@@ -1,9 +1,11 @@
 package com.myshopdemo.fi.controller.fragment;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.hyphenate.easeui.ui.EaseContactListFragment;
 import com.myshopdemo.fi.R;
+import com.myshopdemo.fi.controller.activity.AddContactActivity;
 
 /**
  * 创建者     yangyanfei
@@ -26,5 +28,20 @@ public class ContactListFragment extends EaseContactListFragment {
         //添加头布局
         View headerView=View.inflate(getActivity(),R.layout.header_fragment_contact,null);
         listView.addHeaderView(headerView);
+    }
+
+    @Override
+    protected void setUpView() {
+        super.setUpView();
+
+        //加号按钮的点击事件
+        titleBar.setRightLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到添加联系人页面
+                Intent intent=new Intent(getActivity(),AddContactActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
