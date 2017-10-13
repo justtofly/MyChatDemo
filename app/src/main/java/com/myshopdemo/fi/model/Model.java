@@ -2,6 +2,8 @@ package com.myshopdemo.fi.model;
 
 import android.content.Context;
 
+import com.myshopdemo.fi.model.dao.UserAccountDao;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,6 +26,9 @@ public class Model {
     //创建对象
     private static Model model = new Model();
 
+    //创建用户帐号数据库的操作类对象
+    private UserAccountDao mUserAccountDao;
+
     //私有构造方法
     private Model() {
     }
@@ -36,10 +41,23 @@ public class Model {
     //初始化的方法
     public void init(Context context) {
         mContext = context;
+
+        //实例化用户帐号数据库的操作类对象
+        mUserAccountDao = new UserAccountDao(mContext);
     }
 
     //获取全局线程池对象
-    public ExecutorService getGlobalThreadPool(){
+    public ExecutorService getGlobalThreadPool() {
         return executors;
+    }
+
+    //用户登录成功后的处理方法
+    public void loginSuccess() {
+
+    }
+
+    //获取用户帐户数据库操作对象
+    public UserAccountDao getUserAccountDao(){
+        return mUserAccountDao;
     }
 }

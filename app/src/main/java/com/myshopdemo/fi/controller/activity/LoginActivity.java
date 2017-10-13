@@ -1,6 +1,7 @@
 package com.myshopdemo.fi.controller.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,9 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.myshopdemo.fi.R;
 import com.myshopdemo.fi.model.Model;
+import com.myshopdemo.fi.model.bean.UserInfo;
 
 //登录页面
 public class LoginActivity extends Activity {
@@ -53,10 +56,65 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * 登录的业务逻辑处理
+     * 登录按钮的业务逻辑处理
      */
     private void login() {
+        //1.获取输入的用户名和密码
+        final String loginName = mEt_login_user.getText().toString();
+        final String loginPwd = mEt_login_password.getText().toString();
 
+        //2.校验输入的用户名和密码
+        if (TextUtils.isEmpty(loginName) || TextUtils.isEmpty(loginPwd)) {
+            Toast.makeText(this, "您输入的用户名或者密码为空，请重新输入！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //3.登录逻辑处理
+        Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                //去环信服务器登录
+                EMClient.getInstance().login(loginName, loginPwd, new EMCallBack() {
+                    @Override
+                    public void onSuccess() {//成功
+                        //对模型层数据的处理
+                        Model.getInstance().loginSuccess();
+
+                        //保存用户帐号信息到本地数据库
+                        Model.getInstance().getUserAccountDao().addAccount(new UserInfo(loginName));
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //提示登录成功
+                                Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+
+                                //跳转到主页面
+                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(int i, final String s) {//失败
+                        //提示登录失败
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(LoginActivity.this,"登录失败"+s,Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onProgress(int i, String s) {//登录过程中的处理
+
+                    }
+                });
+            }
+        });
     }
 
     /**

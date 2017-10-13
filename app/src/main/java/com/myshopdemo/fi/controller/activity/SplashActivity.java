@@ -9,6 +9,7 @@ import android.os.Message;
 import com.hyphenate.chat.EMClient;
 import com.myshopdemo.fi.R;
 import com.myshopdemo.fi.model.Model;
+import com.myshopdemo.fi.model.bean.UserInfo;
 
 /**
  * 欢迎页面
@@ -38,10 +39,18 @@ public class SplashActivity extends Activity {
                 //判断当前帐号是否已经登录过
                 if (EMClient.getInstance().isLoggedInBefore()) {//登录过
                     //获取当前用户的登录信息
+                    UserInfo userInfo=Model.getInstance().getUserAccountDao().getAccountByHxId(EMClient.getInstance().getCurrentUser());
 
-                    //跳转到主页面
-                    Intent intent=new Intent(SplashActivity.this,MainActivity.class);
-                    startActivity(intent);
+                    if(userInfo==null){
+                        //跳转到登录页面
+                        Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                    }else {
+                        //跳转到主页面
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+
                 }else {//没登录过
                     //跳转到登录页面
                     Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
