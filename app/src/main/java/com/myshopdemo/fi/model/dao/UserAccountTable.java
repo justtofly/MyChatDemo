@@ -3,7 +3,7 @@ package com.myshopdemo.fi.model.dao;
 /**
  * 创建者     yangyanfei
  * 创建时间   2017/10/13 0013 11:04
- * 作用	      建表类
+ * 作用	      用户信息表的建表语句
  * <p/>
  * 版本       $$Rev$$
  * 更新者     $$Author$$
