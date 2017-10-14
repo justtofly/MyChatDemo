@@ -17,7 +17,8 @@ import com.myshopdemo.fi.IMApplication;
  * 更新描述   ${TODO}
  */
 public class SpUtils {
-    private static SpUtils instance = new SpUtils();//饿汉式
+    public static final String  IS_NEW_INVITE = "is_new_invite";//新的邀请
+    private static      SpUtils instance      = new SpUtils();//饿汉式
     private static SharedPreferences mSp;
 
     //私有构造方法
@@ -26,14 +27,14 @@ public class SpUtils {
 
     //获取单例对象
     public static SpUtils getInstance() {
-        if (mSp==null){
-            mSp= IMApplication.getGlobalApplication().getSharedPreferences("im", Context.MODE_PRIVATE);
+        if (mSp == null) {
+            mSp = IMApplication.getGlobalApplication().getSharedPreferences("im", Context.MODE_PRIVATE);
         }
         return instance;
     }
 
     //保存
-    public void save(String key,Object value){
+    public void save(String key, Object value) {
         if (value instanceof String){
             mSp.edit().putString(key, (String)value).commit();
         }else if (value instanceof  Boolean){
@@ -50,7 +51,7 @@ public class SpUtils {
 
     //获取boolean数据
     public boolean getBoolean(String key,boolean defValue){
-        return mSp.getBoolean(key,defValue);
+        return mSp.getBoolean(key, defValue);
     }
 
     //获取int类型数据

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.myshopdemo.fi.model.bean.UserInfo;
 import com.myshopdemo.fi.model.dao.UserAccountDao;
 import com.myshopdemo.fi.model.db.DBManager;
+import com.myshopdemo.fi.model.db.EventListener;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -49,6 +50,9 @@ public class Model {
 
         //实例化用户帐号数据库的操作类对象
         mUserAccountDao = new UserAccountDao(mContext);
+
+        //开启全局监听
+        EventListener eventListener=new EventListener(mContext);
     }
 
     //获取全局线程池对象
