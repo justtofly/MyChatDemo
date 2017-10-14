@@ -65,8 +65,13 @@ public class SettingFragment extends Fragment {
                     public void run() {
                         //登录环信服务器退出登录
                         EMClient.getInstance().logout(false, new EMCallBack() {
+
                             @Override
-                            public void onSuccess() {
+                            public void onSuccess() {//成功退出登录
+
+                                //关闭DBHelper
+                                Model.getInstance().getDBManager().close();
+
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {

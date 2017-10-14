@@ -2,7 +2,9 @@ package com.myshopdemo.fi.model;
 
 import android.content.Context;
 
+import com.myshopdemo.fi.model.bean.UserInfo;
 import com.myshopdemo.fi.model.dao.UserAccountDao;
+import com.myshopdemo.fi.model.db.DBManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,6 +31,9 @@ public class Model {
     //创建用户帐号数据库的操作类对象
     private UserAccountDao mUserAccountDao;
 
+    //创建数据库管理类对象
+    private DBManager mDBManager;
+
     //私有构造方法
     private Model() {
     }
@@ -52,8 +57,23 @@ public class Model {
     }
 
     //用户登录成功后的处理方法
-    public void loginSuccess() {
+    public void loginSuccess(UserInfo account) {
+        if (account==null){
+            return;
+        }
 
+        if (mDBManager!=null){
+            mDBManager.close();
+        }
+        mDBManager=new DBManager(mContext,account.getName());
+    }
+
+    /**
+     * 获取数据库管理类对象
+     * @return
+     */
+    public DBManager getDBManager(){
+        return mDBManager;
     }
 
     //获取用户帐户数据库操作对象

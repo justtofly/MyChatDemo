@@ -5,11 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.myshopdemo.fi.model.dao.ContactTable;
+import com.myshopdemo.fi.model.dao.InviteTable;
 
 /**
  * 创建者     yangyanfei
  * 创建时间   2017/10/13 0013 23:19
- * 作用	      创建联系人和邀请信息数据库
+ * 作用	      联系人和邀请信息数据库
  * <p/>
  * 版本       $$Rev$$
  * 更新者     $$Author$$
@@ -27,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(ContactTable.CREATE_TAB);
 
         //创建邀请信息的表
+        db.execSQL(InviteTable.CREATE_TAB);
     }
 
     @Override

@@ -78,7 +78,7 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onSuccess() {//成功
                         //对模型层数据的处理
-                        Model.getInstance().loginSuccess();
+                        Model.getInstance().loginSuccess(new UserInfo(loginName));
 
                         //保存用户帐号信息到本地数据库
                         Model.getInstance().getUserAccountDao().addAccount(new UserInfo(loginName));
@@ -87,10 +87,10 @@ public class LoginActivity extends Activity {
                             @Override
                             public void run() {
                                 //提示登录成功
-                                Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 
                                 //跳转到主页面
-                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -103,7 +103,7 @@ public class LoginActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(LoginActivity.this,"登录失败"+s,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登录失败" + s, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -143,7 +143,7 @@ public class LoginActivity extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (Exception e) {
@@ -152,7 +152,7 @@ public class LoginActivity extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -11,9 +11,9 @@ package com.myshopdemo.fi.model.bean;
  * 更新描述   ${TODO}
  */
 public class InvationInfo {
-    private UserInfo user;//联系人
-    private GroupInfo group;//群
-    private String reason;//邀请原因
+    private UserInfo         user;//联系人
+    private GroupInfo        group;//群
+    private String           reason;//邀请原因
     private InvitationStatus status;//邀请的状态
 
     public InvationInfo() {
@@ -66,5 +66,37 @@ public class InvationInfo {
 
         //群申请被拒绝
         GROUP_APPLICATION_DECLINED
+    }
+
+    public GroupInfo getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupInfo group) {
+        this.group = group;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public InvitationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InvitationStatus status) {
+        this.status = status;
+    }
+
+    public UserInfo getUser() {
+        return user;
+    }
+
+    public void setUser(UserInfo user) {
+        this.user = user;
     }
 }
