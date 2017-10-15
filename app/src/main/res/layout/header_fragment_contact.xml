@@ -5,6 +5,7 @@
               android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/ll_contact_invite"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,6 +17,13 @@
             android:text="好友邀请"
             android:layout_marginLeft="10dp"
             android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/iv_contact_red"
+            android:src="@drawable/ic_notification_overlay"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
