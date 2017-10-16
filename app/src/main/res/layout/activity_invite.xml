@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.myshopdemo.fi.controller.activity.InviteActivity">
+    <com.hyphenate.easeui.widget.EaseTitleBar
+        app:titleBarTitle="邀请信息列表页面"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.hyphenate.easeui.widget.EaseTitleBar>
 
-</RelativeLayout>
+    <ListView
+        android:id="@+id/lv_invite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+</LinearLayout>
