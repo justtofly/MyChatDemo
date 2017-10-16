@@ -43,6 +43,10 @@ public class InviteAdapter extends BaseAdapter {
     //刷新数据的方法
     public void refresh(List<InvationInfo> invationInfos) {
         if (invationInfos != null && invationInfos.size() >= 0) {
+
+            //每次进来，先把它清空,再添加
+            mInvationInfos.clear();
+
             mInvationInfos.addAll(invationInfos);
 
             //刷新适配器
